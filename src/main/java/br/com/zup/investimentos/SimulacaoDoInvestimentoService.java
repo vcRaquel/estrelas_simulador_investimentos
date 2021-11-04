@@ -18,8 +18,9 @@ public class SimulacaoDoInvestimentoService {
         return montante;
     }
 
-    public double calcularLucro(double valorInvestido, double motante){
-        double lucro = motante - valorInvestido;
+    public double calcularLucro(double valorInvestido, int quantidadedeMeses, TipodeRisco tipodeRisco){
+        double montante = calcularMontante(valorInvestido, quantidadedeMeses, tipodeRisco);
+        double lucro = montante - valorInvestido;
         return lucro;
     }
 
