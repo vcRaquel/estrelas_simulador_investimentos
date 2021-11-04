@@ -2,44 +2,48 @@ package br.com.zup.investimentos;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class SimulacaoService {
-    List<RespostaDTO> simulacoes;
+    List<SimulacaoDTO> simulacoes = new ArrayList<>();
 
 
     // adicionar investimento
-    public void adicionarRespostaALista(RespostaDTO respostaDTO){
-        simulacoes.add(respostaDTO);
+    public void adicionarSimulacaoALista(SimulacaoDTO simulacaoDTO){
+        simulacoes.add(simulacaoDTO);
     }
 
-    public List<RespostaDTO> retornarSimulacoes(){
+    public List<SimulacaoDTO> retornarSimulacoes(){
         return simulacoes;
     }
 
-    public double calcularMultiplicadorDeCapital(TipodeRisco tipoDeRisco, int quantidadeMeses){
-       double multiplicadorDeCapital = Math.pow((1 + tipoDeRisco.getTaxaDeRetorno()), quantidadeMeses);
+    public double calcularMultiplicadorDeCapital(SimulacaoDTO simulacaoDTO){
+        //TipodeRisco tipoDeRisco, int quantidadeMeses
+       double multiplicadorDeCapital = Math.pow((1 + simulacaoDTO.getRisco().getTaxaDeRetorno()), simulacaoDTO.getMeses());
        return multiplicadorDeCapital;
    }
 
-    public double calcularMontante(double valorInvestido, int quantidadeMeses, TipodeRisco tipodeRisco){
-        double montante = valorInvestido * calcularMultiplicadorDeCapital(tipodeRisco, quantidadeMeses);
+    public double calcularMontante(SimulacaoDTO simulacaoDTO){
+        //double valorInvestido, int quantidadeMeses, TipodeRisco tipodeRisco
+        double montante = simulacaoDTO.getValorInvestido() * calcularMultiplicadorDeCapital(simulacaoDTO);
         return montante;
     }
 
-    public double calcularLucro(double valorInvestido, int quantidadedeMeses, TipodeRisco tipodeRisco){
-        double montante = calcularMontante(valorInvestido, quantidadedeMeses, tipodeRisco);
-        double lucro = montante - valorInvestido;
+    public double calcularLucro(SimulacaoDTO simulacaoDTO  ){
+        //*double valorInvestido, int quantidadedeMeses, TipodeRisco tipodeRisco *
+        double montante = calcularMontante(simulacaoDTO);
+        double lucro = montante - simulacaoDTO.getValorInvestido();
         return lucro;
     }
 
-    public RespostaDTO simularInvestimento(double capital, int quantidadedeMeses, TipodeRisco tipodeRisco){
-        double valorTotalDoLucro = calcularLucro(capital, quantidadedeMeses, tipodeRisco);
-        double valorTotal = calcularMontante(capital, quantidadedeMeses,tipodeRisco);
+    public RespostaDTO simularInvestimento(SimulacaoDTO simulacaoDTO){
+        double valorTotalDoLucro = calcularLucro(simulacaoDTO);
+        double valorTotal = calcularMontante(simulacaoDTO);
 
-        RespostaDTO respostaDTO = new RespostaDTO(capital, valorTotalDoLucro, valorTotal);
-        adicionarRespostaALista(respostaDTO);
+        RespostaDTO respostaDTO = new RespostaDTO(simulacaoDTO.getValorInvestido(), valorTotalDoLucro, valorTotal);
+        adicionarSimulacaoALista(simulacaoDTO);
         return respostaDTO;
     }
 
