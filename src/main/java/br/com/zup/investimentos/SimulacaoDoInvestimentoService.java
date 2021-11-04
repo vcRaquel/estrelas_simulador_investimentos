@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class SimulacaoDoInvestimentoService {
 
-   public double calcularMultiplicadorDeCapital(TipodeRisco tipoDeRisco, int quantidadeMeses){
+   //cadastrar simulaçao de investimento
+   // simular investimento
+
+    public double calcularMultiplicadorDeCapital(TipodeRisco tipoDeRisco, int quantidadeMeses){
        double multiplicadorDeCapital = Math.pow((1 + tipoDeRisco.getTaxaDeRetorno()), quantidadeMeses);
        return multiplicadorDeCapital;
    }
