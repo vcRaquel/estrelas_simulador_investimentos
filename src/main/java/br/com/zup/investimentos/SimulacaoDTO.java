@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class SimulacaoDoInvestimentoDTO {
+public class SimulacaoDTO {
     @Email(message = "email inválido")
     private String email;
 
@@ -27,7 +27,7 @@ public class SimulacaoDoInvestimentoDTO {
     @NotEmpty
     private TipodeRisco risco;
 
-    public SimulacaoDoInvestimentoDTO() {
+    public SimulacaoDTO() {
 
     }
 

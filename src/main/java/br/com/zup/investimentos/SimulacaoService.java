@@ -2,11 +2,16 @@ package br.com.zup.investimentos;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public class SimulacaoDoInvestimentoService {
+import java.util.List;
 
-   //cadastrar simulaçao de investimento
-   // simular investimento
+@Service
+public class SimulacaoService {
+    List<RespostaDTO> simulacoes;
+
+   // adicionar investimento
+    public void adicionarRespostaALista(RespostaDTO respostaDTO){
+        simulacoes.add(respostaDTO);
+    }
 
     public double calcularMultiplicadorDeCapital(TipodeRisco tipoDeRisco, int quantidadeMeses){
        double multiplicadorDeCapital = Math.pow((1 + tipoDeRisco.getTaxaDeRetorno()), quantidadeMeses);
@@ -22,6 +27,14 @@ public class SimulacaoDoInvestimentoService {
         double montante = calcularMontante(valorInvestido, quantidadedeMeses, tipodeRisco);
         double lucro = montante - valorInvestido;
         return lucro;
+    }
+
+    public RespostaDTO simularInvestimento(double capital, int quantidadedeMeses, TipodeRisco tipodeRisco){
+        double valorTotalDoLucro = calcularLucro(capital, quantidadedeMeses, tipodeRisco);
+        double valorTotal = calcularMontante(capital, quantidadedeMeses,tipodeRisco);
+
+        RespostaDTO respostaDTO = new RespostaDTO(capital, valorTotalDoLucro, valorTotal);
+        return respostaDTO;
     }
 
 }
