@@ -1,7 +1,7 @@
 package br.com.zup.investimentos;
 
 public enum TipodeRisco {
-    ALTO(0.0025), MEDIO(0.0015), BAIXO(0.0005);
+    ALTO(0.025), MEDIO(0.015), BAIXO(0.005);
 
     private double taxaDeRetorno;
 
