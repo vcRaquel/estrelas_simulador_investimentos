@@ -1,20 +1,27 @@
 package br.com.zup.investimentos;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/investimento")
 public class SimulacaoController {
     @Autowired
-    private SimulacaoService simulacaoDoInvestimentoService;
+    private SimulacaoService simulacaoService;
 
-    //@PostMapping
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public RespostaDTO realizarSimulacao(@RequestBody SimulacaoDTO simulacaoDTO) {
+        RespostaDTO respostaDTO = simulacaoService.simularInvestimento(simulacaoDTO.getValorInvestido(),
+                simulacaoDTO.getMeses(), simulacaoDTO.getRisco());
+        return respostaDTO;
+    }
 
-    //@GetMapping
-    // public RespostaDTO realizarSimulacao(@RequestBody SimulacaoDTO simulacaoDTO){
-    //return simulacaoService.calcularESalvarSimulacao(simulacaoDTO)
-    //}
-    //new RespostaDTO(23, 344, 54)
+    @GetMapping
+    public List<RespostaDTO> exibirRespostas() {
+        return simulacaoService.retornarSimulacoes();
+    }
 }

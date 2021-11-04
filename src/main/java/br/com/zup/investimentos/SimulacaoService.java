@@ -8,9 +8,14 @@ import java.util.List;
 public class SimulacaoService {
     List<RespostaDTO> simulacoes;
 
-   // adicionar investimento
+
+    // adicionar investimento
     public void adicionarRespostaALista(RespostaDTO respostaDTO){
         simulacoes.add(respostaDTO);
+    }
+
+    public List<RespostaDTO> retornarSimulacoes(){
+        return simulacoes;
     }
 
     public double calcularMultiplicadorDeCapital(TipodeRisco tipoDeRisco, int quantidadeMeses){
@@ -34,6 +39,7 @@ public class SimulacaoService {
         double valorTotal = calcularMontante(capital, quantidadedeMeses,tipodeRisco);
 
         RespostaDTO respostaDTO = new RespostaDTO(capital, valorTotalDoLucro, valorTotal);
+        adicionarRespostaALista(respostaDTO);
         return respostaDTO;
     }
 

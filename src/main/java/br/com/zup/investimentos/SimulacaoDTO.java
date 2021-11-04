@@ -2,10 +2,7 @@ package br.com.zup.investimentos;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class SimulacaoDTO {
     @Email(message = "email inválido")
@@ -21,7 +18,7 @@ public class SimulacaoDTO {
     @NotBlank
     private double valorInvestido;
 
-    @NotBlank
+    @Min(1) @Max(12)
     private int meses;
 
     @NotEmpty
@@ -31,5 +28,51 @@ public class SimulacaoDTO {
 
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public double getValorInvestido() {
+        return valorInvestido;
+    }
+
+    public void setValorInvestido(double valorInvestido) {
+        this.valorInvestido = valorInvestido;
+    }
+
+    public int getMeses() {
+        return meses;
+    }
+
+    public void setMeses(int meses) {
+        this.meses = meses;
+    }
+
+    public TipodeRisco getRisco() {
+        return risco;
+    }
+
+    public void setRisco(TipodeRisco risco) {
+        this.risco = risco;
+    }
 }
