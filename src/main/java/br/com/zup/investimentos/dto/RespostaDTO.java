@@ -1,4 +1,4 @@
-package br.com.zup.investimentos;
+package br.com.zup.investimentos.dto;
 
 public class RespostaDTO {
     private double valorInvestido;

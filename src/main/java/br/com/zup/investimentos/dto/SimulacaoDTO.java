@@ -1,5 +1,6 @@
-package br.com.zup.investimentos;
+package br.com.zup.investimentos.dto;
 
+import br.com.zup.investimentos.TipodeRisco;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.*;

@@ -1,11 +1,12 @@
-package br.com.zup.investimentos;
+package br.com.zup.investimentos.controller;
 
+import br.com.zup.investimentos.dto.RespostaDTO;
+import br.com.zup.investimentos.dto.SimulacaoDTO;
+import br.com.zup.investimentos.service.SimulacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/investimento")

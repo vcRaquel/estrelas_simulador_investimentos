@@ -1,7 +1,10 @@
-package br.com.zup.investimentos;
+package br.com.zup.investimentos.service;
 
+import br.com.zup.investimentos.TipodeRisco;
+import br.com.zup.investimentos.dto.RespostaDTO;
+import br.com.zup.investimentos.dto.SimulacaoDTO;
+import br.com.zup.investimentos.exceptionPersonalizada.ValorBaixoParaTipoDeRiscoException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +45,7 @@ public class SimulacaoService {
 
     public RespostaDTO simularInvestimento(SimulacaoDTO simulacaoDTO){
         if (simulacaoDTO.getValorInvestido() < 5000 && simulacaoDTO.getRisco().equals(TipodeRisco.ALTO)){
-//            throw new ResponseStatusException("bad");
+            throw new ValorBaixoParaTipoDeRiscoException("R$ 5000 é o valor mínimo para investimento de Alto risco");
         }
 
         double valorTotalDoLucro = calcularLucro(simulacaoDTO);
