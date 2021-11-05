@@ -8,20 +8,18 @@ public class SimulacaoDTO {
     @Email(message = "email inválido")
     private String email;
 
-    @NotBlank
     @Size(min = 2, max = 30, message = "O nome deve ter entre 2 e 30 caracteres")
     private String nome;
 
     @CPF(message = "CPF inválido")
     private String cpf;
 
-    @NotBlank
     private double valorInvestido;
 
-    @Min(1) @Max(12)
-    private int meses;
+    @Min(2)
+    @Max(12)
+    private int periodoDeAplicacaoMeses;
 
-    @NotEmpty
     private TipodeRisco risco;
 
     public SimulacaoDTO() {
@@ -60,12 +58,12 @@ public class SimulacaoDTO {
         this.valorInvestido = valorInvestido;
     }
 
-    public int getMeses() {
-        return meses;
+    public int getPeriodoDeAplicacaoMeses() {
+        return periodoDeAplicacaoMeses;
     }
 
     public void setMeses(int meses) {
-        this.meses = meses;
+        this.periodoDeAplicacaoMeses = meses;
     }
 
     public TipodeRisco getRisco() {

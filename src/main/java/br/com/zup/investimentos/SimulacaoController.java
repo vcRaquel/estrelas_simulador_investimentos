@@ -14,10 +14,8 @@ public class SimulacaoController {
     private SimulacaoService simulacaoService;
 
     @PutMapping
-//    @ResponseStatus(HttpStatus.OK) por padrão
-    public RespostaDTO realizarSimulacao(@RequestBody @Valid SimulacaoDTO simulacaoDTO) {
-        RespostaDTO respostaDTO = simulacaoService.simularInvestimento(simulacaoDTO.getValorInvestido(),
-                simulacaoDTO.getMeses(), simulacaoDTO.getRisco());
+    public RespostaDTO realizarSimulacao(@Valid @RequestBody SimulacaoDTO simulacaoDTO) {
+        RespostaDTO respostaDTO = simulacaoService.simularInvestimento(simulacaoDTO);
         return respostaDTO;
     }
 

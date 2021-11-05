@@ -1,6 +1,7 @@
 package br.com.zup.investimentos;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,8 @@ public class SimulacaoService {
 
     public double calcularMultiplicadorDeCapital(SimulacaoDTO simulacaoDTO){
         //TipodeRisco tipoDeRisco, int quantidadeMeses
-       double multiplicadorDeCapital = Math.pow((1 + simulacaoDTO.getRisco().getTaxaDeRetorno()), simulacaoDTO.getMeses());
+       double multiplicadorDeCapital =
+               Math.pow((1 + simulacaoDTO.getRisco().getTaxaDeRetorno()), simulacaoDTO.getPeriodoDeAplicacaoMeses());
        return multiplicadorDeCapital;
    }
 
@@ -39,6 +41,10 @@ public class SimulacaoService {
     }
 
     public RespostaDTO simularInvestimento(SimulacaoDTO simulacaoDTO){
+        if (simulacaoDTO.getValorInvestido() < 5000 && simulacaoDTO.getRisco().equals(TipodeRisco.ALTO)){
+//            throw new ResponseStatusException("bad");
+        }
+
         double valorTotalDoLucro = calcularLucro(simulacaoDTO);
         double valorTotal = calcularMontante(simulacaoDTO);
 
